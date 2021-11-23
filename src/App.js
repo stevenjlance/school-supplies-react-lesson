@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { textSpanIsEmpty } from "typescript";
 import "./App.css";
 import Hero from "./Components/Hero.js";
 import Product from "./Components/Product.js";
@@ -14,6 +15,7 @@ class App extends Component {
       cart: []
     };
   }
+
   countItem = (array, item) => {
     let counter = 0;
 
@@ -28,13 +30,17 @@ class App extends Component {
   purchase = (item) => {
     console.log(`I just bought ${item}`);
     console.log(this.state);
-    this.state.cart.push(item);
+
+    // option 1
+    // this.setState({ ...this.state, cart: [...this.state.cart, item] });
+
+    // option 2
+    // Spread the old array innto a new array
+    const newCart = [...this.state.cart, item];
+    // Pass this new array into the setState
+    this.setState({ cart: newCart });
   };
 
-  // I think this is what I need, but think it needs to be in product which means product should be a class based component
-  componentDidMount() {
-    console.log("componentDidMount() lifecycle");
-  }
   render() {
     return (
       <div className="App">
@@ -50,7 +56,7 @@ class App extends Component {
           price="2.75"
           buyProduct={this.purchase}
         />
-        <Summary globalState={this.state} />
+        <Summary globalState={this.state} card={this.state.cart} />
       </div>
     );
   }

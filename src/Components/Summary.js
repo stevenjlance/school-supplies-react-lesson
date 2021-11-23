@@ -8,9 +8,12 @@ function Summary(props) {
 
   return (
     <div className="summary">
-      {props.globalState.cart.map((item) => {
-        return <li>{item}</li>;
-      })}
+      <ul>
+        {props?.cart?.length ? null : <li>No items here yet.</li>}
+        {props.globalState.cart.map((item) => {
+          return <li>{item}</li>;
+        })}
+      </ul>
     </div>
   );
 }
