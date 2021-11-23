@@ -1,10 +1,16 @@
-import React from 'react';
-import '../App.css';
+import React from "react";
+import "../App.css";
 
-function Summary() {
-  return(
+function Summary(props) {
+  console.log(props.globalState);
+  //let = props.globalState.looseleaf
+  // let looseleaf = props.globalState.countItem(props.globalState.cart, props.globalState.cart)
+
+  return (
     <div className="summary">
-      <p>This is a Summary!</p>
+      {props.globalState.cart.map((item) => {
+        return <li>{item}</li>;
+      })}
     </div>
   );
 }
